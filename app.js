@@ -6,6 +6,7 @@ const app = express();
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
+const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 app.use(express.json());
 app.use(cors());
@@ -44,6 +45,7 @@ mongoose
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
+app.use("/api/categories", categoryRoute);
 
 //* CORS applied
 app.use((req, res, next) => {
