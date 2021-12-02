@@ -50,7 +50,7 @@ router.put("/:id", verify, async (req, res) => {
 
 //*DELETE POST
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verify, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.username === req.body.username) {
