@@ -12,9 +12,10 @@ router.get("/", (req, res) => {
 });
 
 //*UPDATE
+//! add verify between id and async
 
-router.put("/:id", verify, async (req, res) => {
-  if (req.user.id === req.params.id) {
+router.put("/:id", async (req, res) => {
+  if (req.body.userId === req.params.id) {
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
       req.body.password = await bcrypt.hash(req.body.password, salt);
@@ -39,8 +40,10 @@ router.put("/:id", verify, async (req, res) => {
 
 //*DELETE USER
 
-router.delete("/:id", verify, async (req, res) => {
-  if (req.user.id === req.params.id) {
+//! add verify between id and async
+
+router.delete("/:id", async (req, res) => {
+  if (req.body.id === req.params.id) {
     try {
       const user = await User.findById(req.params.id);
 
