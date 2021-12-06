@@ -5,11 +5,11 @@ const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
 const verify = require("../verifyToken");
 
-//*checker
+// //*checker
 
-router.get("/", (req, res) => {
-  res.send("Hello");
-});
+// router.get("/", (req, res) => {
+//   res.send("Hello");
+// });
 
 //*UPDATE
 //! add verify between id and async

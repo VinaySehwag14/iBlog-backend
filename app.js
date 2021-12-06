@@ -50,6 +50,10 @@ app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/categories", categoryRoute);
 
+app.get("/", (req, res) => {
+  res.send("heelo");
+});
+
 //* CORS applied
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
