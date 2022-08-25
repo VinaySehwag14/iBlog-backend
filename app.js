@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -9,6 +8,7 @@ const postRoute = require("./routes/post");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
+dotenv.config();
 
 app.use(express.json());
 app.use(cors());
