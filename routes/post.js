@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
-const verify = require("../verifyToken");
+// const bcrypt = require("bcrypt");
+// const verify = require("./verifyToken");
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verifyToken");
 
 // //*checker
 
@@ -18,7 +23,7 @@ router.post("/", async (req, res) => {
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (err) {
-    console.log(err);
+    res.status(500).json(err);
   }
 });
 
@@ -41,7 +46,7 @@ router.put("/:id", async (req, res) => {
         res.status(500).json(err);
       }
     } else {
-      res.status(401).json("Not allowed to change others post!!");
+      res.status(401).json("You can update only your post!");
     }
   } catch (err) {
     res.status(500).json(err);

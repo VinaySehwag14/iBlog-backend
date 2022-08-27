@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const cors = require("cors");
 const app = express();
 const userRoute = require("./routes/user");
@@ -8,7 +9,6 @@ const postRoute = require("./routes/post");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
-dotenv.config();
 
 app.use(express.json());
 app.use(cors());
@@ -16,10 +16,13 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 
 //*mongoDB  connection
 mongoose
-  .connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://malang:freewolf@iblog.l2ega.mongodb.net/iBlog?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("DB connected");
   })
