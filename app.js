@@ -10,19 +10,18 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 
+dotenv.config();
+
 app.use(express.json());
 app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 //*mongoDB  connection
 mongoose
-  .connect(
-    "mongodb+srv://malang:freewolf@iblog.l2ega.mongodb.net/iBlog?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("DB connected");
   })
