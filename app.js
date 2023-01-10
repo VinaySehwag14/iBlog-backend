@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const port = 5000;
 const app = express();
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
@@ -52,6 +53,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/categories", categoryRoute);
 
+app.get("/api/test", () => {});
+
 app.get("/", (req, res) => {
   res.send("heelo");
 });
@@ -68,8 +71,6 @@ app.use((req, res, next) => {
   next();
 });
 
-const port = process.env.PORT || 5050;
-
-app.listen(port, () => {
-  console.log(`Server is running on ${port} PORT`);
+app.listen(process.env.PORT || port, () => {
+  console.log(`Server listening on port ${port}`);
 });
