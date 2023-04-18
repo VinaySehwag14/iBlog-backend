@@ -2,13 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Post = require("../models/Post");
-// const bcrypt = require("bcrypt");
-// const verify = require("./verifyToken");
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
 
 // //*checker
 
@@ -16,10 +9,10 @@ const {
 //   res.send("Hello");
 // });
 
-//*CREATE POST
+//CREATE POST
 router.post("/", async (req, res) => {
+  const newPost = new Post(req.body);
   try {
-    const newPost = await new Post(req.body);
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (err) {
@@ -27,8 +20,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//*UPDATE POST
-//! add verify between id and async
+//UPDATE POST
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -54,8 +46,6 @@ router.put("/:id", async (req, res) => {
 });
 
 //*DELETE POST
-
-//! add verify between id and async
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -74,8 +64,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//*Get a post
-
+//*GET a POST
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -85,14 +74,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//*Get all post
+//*GET ALL POSTS
 router.get("/", async (req, res) => {
   const username = req.query.user;
   const catName = req.query.cat;
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username: username });
+      posts = await Post.find({ username });
     } else if (catName) {
       posts = await Post.find({
         categories: {

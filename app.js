@@ -53,8 +53,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
 app.use("/api/categories", categoryRoute);
 
-app.get("/api/test", () => {});
-
 app.get("/", (req, res) => {
   res.send("heelo this is backend");
 });
